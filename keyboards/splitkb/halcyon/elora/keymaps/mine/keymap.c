@@ -23,6 +23,9 @@ enum layers {
 #define FUNC     MO(_FUNCTION)
 #define ADJUST   MO(_ADJUST)
 
+// tap-hold behavior with nothing on hold
+#define TH(kc)   LT(0, kc)
+
 
 
 // clang-format off
@@ -48,11 +51,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      └──────┴──────┴──────┴──────┴──────┘  └──────┴──────┴──────┴──────┴──────┘
  */
     [_NRTS_MINE] = LAYOUT(
-     KC_MINS, KC_1, KC_2        , KC_3        , KC_4        , KC_5   ,                                       KC_6   , KC_7        , KC_8        , KC_9        , KC_0, KC_EQL,
-     KC_NO  , KC_V, KC_W        , KC_G        , KC_M        , KC_Q   ,                                       KC_Z   , KC_X        , KC_J        , KC_K        , KC_F, KC_NO ,
-     KC_ESC , KC_N, LGUI_T(KC_R), LALT_T(KC_T), LCTL_T(KC_S), KC_COMM,                                       KC_DOT , LCTL_T(KC_A), LALT_T(KC_E), LGUI_T(KC_I), KC_H, KC_ENT,
-     KC_BSPC, KC_P, KC_L        , KC_D        , KC_C        , KC_SLSH, KC_LBRC, KC_CAPS,   FUNC   , KC_RBRC, KC_QUOT, KC_U        , KC_O        , KC_Y        , KC_B, KC_SPC,
-                                  ADJUST      , KC_LGUI     , KC_ENT , KC_SPC , NAV    ,   SYM    , KC_SPC , KC_RALT, KC_RGUI     , KC_APP
+     // Top Row
+     KC_MINS, KC_1, KC_2, KC_3, KC_4, KC_5,  KC_6, KC_7, KC_8, KC_9, KC_0, KC_EQL,
+     // Everything else
+     KC_NO  , TH(KC_V), TH(KC_W), TH(KC_G), TH(KC_M), TH(KC_Q),
+         TH(KC_Z), TH(KC_X), TH(KC_J), TH(KC_K), TH(KC_F), KC_NO,
+     KC_ESC, TH(KC_N), LGUI_T(KC_R), LALT_T(KC_T), LCTL_T(KC_S), TH(KC_COMM),
+         TH(KC_DOT), LCTL_T(KC_A), LALT_T(KC_E), LGUI_T(KC_I), TH(KC_H), KC_ENT,
+     KC_BSPC, TH(KC_P), TH(KC_L), TH(KC_D), TH(KC_C), TH(KC_SLSH), KC_LBRC, KC_CAPS,
+         FUNC, KC_RBRC, TH(KC_QUOT), TH(KC_U), TH(KC_O), TH(KC_Y), TH(KC_B), KC_DEL,
+     ADJUST, KC_LGUI, KC_ENT, KC_SPC, NAV,
+         SYM, KC_SPC, KC_RALT, KC_RGUI, KC_APP
     ),
 
 /*
