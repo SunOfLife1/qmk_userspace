@@ -66,11 +66,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      └──────┴──────┴──────┴──────┴──────┘  └──────┴──────┴──────┴──────┴──────┘
  */
     [_QWERTY] = LAYOUT(
-     KC_MINS, KC_1    , KC_2   , KC_3   , KC_4   , KC_5   ,                                       KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_EQL ,
-     KC_TAB , KC_Q    , KC_W   , KC_E   , KC_R   , KC_T   ,                                       KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_BSPC,
-     KC_ESC , KC_A    , KC_S   , KC_D   , KC_F   , KC_G   ,                                       KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
-     KC_LSFT, KC_Z    , KC_X   , KC_C   , KC_V   , KC_B   , KC_LBRC, KC_CAPS,   FUNC   , KC_RBRC, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSFT,
-                                 ADJUST , KC_LGUI, KC_ENT , KC_SPC , NAV    ,   SYM    , KC_SPC , KC_RALT, KC_RGUI, KC_APP
+     KC_MINS, KC_1    , KC_2   , KC_3       , KC_4   , KC_5   ,                                       KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_EQL ,
+     KC_TAB , KC_Q    , KC_W   , KC_E       , KC_R   , KC_T   ,                                       KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_BSPC,
+     KC_ESC , KC_A    , KC_S   , KC_D       , KC_F   , KC_G   ,                                       KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
+     KC_LSFT, KC_Z    , KC_X   , KC_C       , KC_V   , KC_B   , KC_LBRC, KC_CAPS ,   MO(_FUNCTION), KC_RBRC, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSFT,
+                                 MO(_ADJUST), KC_LGUI, KC_ENT , KC_SPC , MO(_NAV),   MO(_SYM)     , KC_SPC , KC_RALT, KC_RGUI, KC_APP
     ),
 
 /*
@@ -329,28 +329,17 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 // hardcoded handedness for nrts-mine
 bool is_left_hand(uint16_t keycode) {
     switch (keycode) {
-        case KC_MINS:
-        case KC_1:
-        case KC_2:
-        case KC_3:
-        case KC_4:
-        case KC_5:
+        case KC_MINS: case KC_1: case KC_2: case KC_3: case KC_4: case KC_5:
+        case KC_V: case KC_W: case KC_G: case KC_M: case KC_Q:
+        case KC_N: case KC_R: case KC_T: case KC_S: case KC_COMM:
+        case KC_P: case KC_L: case KC_D: case KC_C: case KC_SLSH:
             return true;
 
-        case KC_6:
-        case KC_7:
-        case KC_8:
-        case KC_9:
-        case KC_0:
-        case KC_EQL:
+        case KC_6: case KC_7: case KC_8: case KC_9: case KC_0: case KC_EQL:
+        case KC_Z: case KC_X: case KC_J: case KC_K: case KC_F:
+        case KC_DOT: case KC_A: case KC_E: case KC_I: case KC_H:
+        case KC_QUOT: case KC_U: case KC_O: case KC_Y: case KC_B:
             return false;
-
-        TH(KC_V), TH(KC_W), TH(KC_G), TH(KC_M), TH(KC_Q),
-            TH(KC_Z), TH(KC_X), TH(KC_J), TH(KC_K), TH(KC_F),
-        LALT_T(KC_N), LSFT_T(KC_R), LCTL_T(KC_T), LGUI_T(KC_S), TH(KC_COMM),
-            TH(KC_DOT), RGUI_T(KC_A), RCTL_T(KC_E), RSFT_T(KC_I), LALT_T(KC_H),
-        TH(KC_P), TH(KC_L), TH(KC_D), TH(KC_C), TH(KC_SLSH),
-            TH(KC_QUOT), TH(KC_U), TH(KC_O), TH(KC_Y), TH(KC_B),
     }
 }
 
