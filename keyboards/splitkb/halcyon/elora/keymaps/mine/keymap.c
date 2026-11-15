@@ -341,6 +341,8 @@ bool is_left_hand(uint16_t keycode) {
         case KC_QUOT: case KC_U: case KC_O: case KC_Y: case KC_B:
             return false;
     }
+
+    return false;
 }
 
 
@@ -373,6 +375,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             }
             break;
         case M_SPT_R:
+            uint16_t prevkeycode = get_last_keycode();
             switch (prevkeycode) {
                 case KC_A: case KC_B: case KC_C: case KC_D: case KC_E: case KC_F:
                 case KC_G: case KC_H: case KC_I: case KC_J: case KC_K: case KC_L:
