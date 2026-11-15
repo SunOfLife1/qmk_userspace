@@ -3,28 +3,9 @@
 
 #include QMK_KEYBOARD_H
 
-enum layers {
-    _NRTS_MINE = 0,
-    _QWERTY,
-    _NAV,
-    _NUM,
-    _SYM,
-    _FUNCTION,
-    _ADJUST,
-};
+#include "layers.h"
+#include "keys.h"
 
-// Aliases for readability
-#define NRTS     DF(_NRTS_MINE)
-#define QWERTY   DF(_QWERTY)
-
-#define NUM      MO(_NUM)
-#define SYM      MO(_SYM)
-#define NAV      MO(_NAV)
-#define FUNC     MO(_FUNCTION)
-#define ADJUST   MO(_ADJUST)
-
-// tap-hold behavior with nothing on hold
-#define TH(kc)   LT(0, kc)
 
 
 
@@ -37,31 +18,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * │ - _  │ 1 !  │ 2 @  │ 3 #  │ 4 $  │ 5 %  │                              │ 6 ^  │ 7 &  │ 8 *  │ 9 (  │ 0 )  │ = +  │
  * │      │      │      │      │      │      │                              │      │      │      │      │      │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                              ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │ ???  │ v V  │ w W  │ g G  │ m M  │ q Q  │                              │ z Z  │ x X  │ j J  │ k K  │ f F  │ ???  │
+ * │ Tab  │ v V  │ w W  │ g G  │ m M  │ q Q  │                              │ z Z  │ x X  │ j J  │ k K  │ f F  │ Tab  │
  * │      │      │      │      │      │      │                              │      │      │      │      │      │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                              ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │ Esc  │ n N  │ r R  │ t T  │ s S  │ , <  │                              │ . >  │ a A  │ e E  │ i I  │ h H  │ Ent  │
- * │      │      │ LGUI │ LAlt │ LCtl │      │                              │      │ LCtl │ LAlt │ LGUI │      │      │
+ * │ Esc  │ n N  │ r R  │ t T  │ s S  │ , ?  │                              │ . !  │ a A  │ e E  │ i I  │ h H  │ Ent  │
+ * │      │ LAlt │ LSft │ LCtl │ LGUI │      │                              │      │ RGUI │ RCtl │ RSft │ LAlt │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┼──────┬──────┐  ┌──────┬──────┼──────┼──────┼──────┼──────┼──────┼──────┤
- * │ Bspc │ p P  │ l L  │ d D  │ c C  │ / ?  │ [ {  │CapsLk│  │FKeys │ ] }  │ ' "  │ u U  │ o O  │ y Y  │ b B  │ Del  │
- * │      │      │      │      │      │      │      │      │  │      │      │      │      │      │      │      │      │
+ * │ Bspc │ p P  │ l L  │ d D  │ c C  │ / \  │ ???? │ ???? │  │ ???? │ ???? │ ' "  │ u U  │ o O  │ y Y  │ b B  │ Del  │
+ * │      │      │      │      │      │      │ ???? │ ???? │  │ ???? │ ???? │      │      │      │      │      │      │
  * └──────┴──────┴──────┼──────┼──────┼──────┼──────┼──────┤  ├──────┼──────┼──────┼──────┼──────┼──────┴──────┴──────┘
- *                      │Adjust│ LGUI │ Ent  │ Spc  │ Nav  │  │ Sym  │ Spc  │ RAlt │ RGUI │ Menu │
- *                      │      │      │      │      │      │  │      │      │      │      │      │
+ *                      │ ???? │ Ent  │Magic │SpcRpt│CapsLk│  │CapsWd│SpcRpt│Magic │ Ent  │ ???? │
+ *                      │Adjust│ Sym  │ Nav  │ LSft │ ???? │  │ ???? │ RSft │ Num  │ Func │ ???? │
  *                      └──────┴──────┴──────┴──────┴──────┘  └──────┴──────┴──────┴──────┴──────┘
  */
     [_NRTS_MINE] = LAYOUT(
      // Top Row
      KC_MINS, KC_1, KC_2, KC_3, KC_4, KC_5,  KC_6, KC_7, KC_8, KC_9, KC_0, KC_EQL,
      // Everything else
-     KC_NO  , TH(KC_V), TH(KC_W), TH(KC_G), TH(KC_M), TH(KC_Q),
-         TH(KC_Z), TH(KC_X), TH(KC_J), TH(KC_K), TH(KC_F), KC_NO,
-     KC_ESC, TH(KC_N), LGUI_T(KC_R), LALT_T(KC_T), LCTL_T(KC_S), TH(KC_COMM),
-         TH(KC_DOT), LCTL_T(KC_A), LALT_T(KC_E), LGUI_T(KC_I), TH(KC_H), KC_ENT,
-     KC_BSPC, TH(KC_P), TH(KC_L), TH(KC_D), TH(KC_C), TH(KC_SLSH), KC_LBRC, KC_CAPS,
-         FUNC, KC_RBRC, TH(KC_QUOT), TH(KC_U), TH(KC_O), TH(KC_Y), TH(KC_B), KC_DEL,
-     ADJUST, KC_LGUI, KC_ENT, KC_SPC, NAV,
-         SYM, KC_SPC, KC_RALT, KC_RGUI, KC_APP
+     KC_TAB, TH(KC_V), TH(KC_W), TH(KC_G), TH(KC_M), TH(KC_Q),
+         TH(KC_Z), TH(KC_X), TH(KC_J), TH(KC_K), TH(KC_F), KC_TAB,
+     KC_ESC, LALT_T(KC_N), LSFT_T(KC_R), LCTL_T(KC_T), LGUI_T(KC_S), TH(KC_COMM),
+         TH(KC_DOT), RGUI_T(KC_A), RCTL_T(KC_E), RSFT_T(KC_I), LALT_T(KC_H), KC_ENT,
+     KC_BSPC, TH(KC_P), TH(KC_L), TH(KC_D), TH(KC_C), TH(KC_SLSH), KC_NO, KC_NO,
+         KC_NO, KC_NO, TH(KC_QUOT), TH(KC_U), TH(KC_O), TH(KC_Y), TH(KC_B), KC_DEL,
+     LT(_ADJUST, KC_NO), LT(_SYM, KC_ENT), LT(_NAV, MAGIC), LSFT_T(M_SPT_L), TH(KC_CAPS),
+         TH(CW_TOGG), RSFT_T(M_SPT_R), LT(_NUM, MAGIC), LT(_FUNCTION, KC_ENT), KC_NO
     ),
 
 /*
@@ -295,3 +276,130 @@ const uint16_t right_halcyon_buttons[10][5] = {
     [_ADJUST] =    { _______, _______, _______, _______, _______ },
 };
 #endif
+
+
+// implement magic with alt repeat
+uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
+    // clang-format off
+    switch (keycode) {
+        // Common Strings
+        // TEST: do this support shift/capslk/capswd?
+        case KC_A: return M_ATION; // also try "and" or SFB "au"
+        case KC_I: return M_ING;
+        case KC_Y: return M_YOU; // the roll looks fun, so see how this all feels
+        case KC_SPC:
+        case KC_ENT:
+        case KC_TAB: return M_THE;
+
+        // SFBs
+        case KC_C: return KC_S;
+        case KC_E: return KC_O;
+        case KC_K: return KC_I;
+        case KC_R: return KC_L;
+        case KC_S: return KC_C;
+        case KC_U: return KC_E;
+
+        // Scissors
+        case KC_B: return KC_E;
+        case KC_F: return KC_O;
+        case KC_G: return KC_L;
+        case KC_J: return KC_U;
+        case KC_M: return KC_P;
+        case KC_N: return KC_D; // needs testing
+        case KC_O: return KC_F;
+
+        // Unused, do nothing
+        case KC_D:
+        case KC_H:
+        case KC_L:
+        case KC_P:
+        case KC_Q:
+        case KC_T:
+        case KC_V:
+        case KC_W: // try "wr" SFB?
+        case KC_X:
+        case KC_Z:
+        default:
+            return KC_NO;
+    }
+    // clang-format on
+}
+
+
+// hardcoded handedness for nrts-mine
+bool is_left_hand(uint16_t keycode) {
+    switch (keycode) {
+        case KC_MINS:
+        case KC_1:
+        case KC_2:
+        case KC_3:
+        case KC_4:
+        case KC_5:
+            return true;
+
+        case KC_6:
+        case KC_7:
+        case KC_8:
+        case KC_9:
+        case KC_0:
+        case KC_EQL:
+            return false;
+
+        TH(KC_V), TH(KC_W), TH(KC_G), TH(KC_M), TH(KC_Q),
+            TH(KC_Z), TH(KC_X), TH(KC_J), TH(KC_K), TH(KC_F),
+        LALT_T(KC_N), LSFT_T(KC_R), LCTL_T(KC_T), LGUI_T(KC_S), TH(KC_COMM),
+            TH(KC_DOT), RGUI_T(KC_A), RCTL_T(KC_E), RSFT_T(KC_I), LALT_T(KC_H),
+        TH(KC_P), TH(KC_L), TH(KC_D), TH(KC_C), TH(KC_SLSH),
+            TH(KC_QUOT), TH(KC_U), TH(KC_O), TH(KC_Y), TH(KC_B),
+    }
+}
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    switch (keycode) {
+        // magic
+        case M_ATION: SEND_STRING(/*a*/"tion"); break;
+        case M_AND: SEND_STRING(/*a*/"nd"); break;
+        case M_ING: SEND_STRING(/*i*/"ng"); break;
+        case M_YOU: SEND_STRING(/*y*/"ou"); break;
+        case M_THE: SEND_STRING(/* */"the"); break;
+
+        // chiral space/repeat (hardcoded for now, only works with nrts-mine)
+        case M_SPT_L:
+            uint16_t prevkeycode = get_last_keycode();
+            switch (prevkeycode) {
+                case KC_A: case KC_B: case KC_C: case KC_D: case KC_E: case KC_F:
+                case KC_G: case KC_H: case KC_I: case KC_J: case KC_K: case KC_L:
+                case KC_M: case KC_N: case KC_O: case KC_P: case KC_Q: case KC_R:
+                case KC_S: case KC_T: case KC_U: case KC_V: case KC_W: case KC_X:
+                case KC_Y: case KC_Z: case KC_COMM: case KC_DOT: case KC_SLSH: case KC_QUOT:
+                    if (is_left_hand(get_last_keycode())) {
+                        tap_code16(QK_REP);
+                    } else {
+                        tap_code(KC_SPC);
+                    }
+                    break;
+                default:
+                    tap_code(KC_SPC);
+            }
+            break;
+        case M_SPT_R:
+            switch (prevkeycode) {
+                case KC_A: case KC_B: case KC_C: case KC_D: case KC_E: case KC_F:
+                case KC_G: case KC_H: case KC_I: case KC_J: case KC_K: case KC_L:
+                case KC_M: case KC_N: case KC_O: case KC_P: case KC_Q: case KC_R:
+                case KC_S: case KC_T: case KC_U: case KC_V: case KC_W: case KC_X:
+                case KC_Y: case KC_Z: case KC_COMM: case KC_DOT: case KC_SLSH: case KC_QUOT:
+                    if (is_left_hand(get_last_keycode())) {
+                        tap_code(KC_SPC);
+                    } else {
+                        tap_code16(QK_REP);
+                    }
+                    break;
+                default:
+                    tap_code(KC_SPC);
+            }
+            break;
+    }
+    return true;
+}
