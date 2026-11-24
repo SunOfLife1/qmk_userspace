@@ -42,30 +42,27 @@ enum custom_keycodes {
  * Key Overrides
  ******************************************************************************/
 
-// S-, → ? (on _NRTS_MINE layer)
-const key_override_t comma_question_key_override = ko_make_with_layers(
+// S-, → ? (on all layers, temporarily)
+const key_override_t comma_question_key_override = ko_make_basic(
     MOD_MASK_SHIFT, KC_COMMA,
-    KC_QUESTION,
-    1 << _NRTS_MINE
+    KC_QUESTION
 );
 
-// S-. → ! (on _NRTS_MINE layer)
-const key_override_t dot_exclamation_key_override = ko_make_with_layers(
+// S-. → ! (on all layers, temporarily)
+const key_override_t dot_exclamation_key_override = ko_make_basic(
     MOD_MASK_SHIFT, KC_DOT,
-    KC_EXCLAIM,
-    1 << _NRTS_MINE
+    KC_EXCLAIM
 );
 
-// S-/ → \ (on _NRTS_MINE layer)
-const key_override_t fslash_bslash_key_override = ko_make_with_layers(
+// S-/ → \ (on all layers, temporarily)
+const key_override_t fslash_bslash_key_override = ko_make_basic(
     MOD_MASK_SHIFT, KC_SLASH,
-    KC_BACKSLASH,
-    1 << _NRTS_MINE
+    KC_BACKSLASH
 );
 
 
 const key_override_t *key_overrides[] = {
     &comma_question_key_override,
     &dot_exclamation_key_override,
-    &fslash_bslash_key_override,
+    &fslash_bslash_key_override
 };
